@@ -5,12 +5,13 @@ import java.util.Locale
 import akka.actor.ActorSystem
 import akka.util.Timeout
 
+import scala.concurrent.ExecutionContextExecutor
 import scala.concurrent.duration._
 import scala.util.{Failure, Success}
 
 object TouristMain extends App {
 
-  //Names the actory system uniquely
+  //Names the actory system uniquely. The unique name if for convenience in troubleshooting which app is having issue.
   val system = ActorSystem("TouristSystem")
 
   /*
@@ -21,7 +22,7 @@ object TouristMain extends App {
   val path="akka.tcp://BookSystem@127.0.0.1:2553/user/guidebook"
 
   implicit  val timeout: Timeout = 5.seconds
-  implicit val ec = system.dispatcher
+  implicit val ec:ExecutionContextExecutor = system.dispatcher
 
   /*
   Converts the path to an ActorSelection and resolves it, this returns a Future[ActorRef]
